@@ -342,23 +342,17 @@ const SUPABASE_URL = 'https://ltrmffnwcenvudxxfbek.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_OHBuSxNOxbtFSYGHyoUuCw_dqoxooFl';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-let currentUser = null;
-let currentTrainerId = null;
-let selectedClientId = null;
-let clients = [];
-let workouts = [];
-let diets = [];
+let currentUser=null,currentTrainerId=null,selectedClientId=null,clients=[],workouts=[],diets=[];
 
-// INIT
 async function init(){
-  const {data:{user}} = await sb.auth.getUser();
+  const {data:{user}}=await sb.auth.getUser();
   if(!user){window.location.href='login.html';return;}
-  currentUser = user;
-  currentTrainerId = user.id;
-  const {data:profile} = await sb.from('profiles').select('*').eq('id',user.id).single();
+  currentUser=user;
+  currentTrainerId=user.id;
+  const {data:profile}=await sb.from('profiles').select('*').eq('id',user.id).single();
   if(profile){
-    document.getElementById('t-nm').textContent = profile.name || user.email;
-    document.getElementById('t-av').textContent = (profile.name||user.email).substring(0,2).toUpperCase();
+    document.getElementById('t-nm').textContent=profile.name||user.email;
+    document.getElementById('t-av').textContent=(profile.name||user.email).substring(0,2).toUpperCase();
   }
   await loadAll();
 }
@@ -371,38 +365,38 @@ async function loadAll(){
 }
 
 async function loadClients(){
-  const {data} = await sb.from('profiles').select('*').eq('trainer_id',currentTrainerId).eq('role','client');
-  clients = data || [];
-  document.getElementById('client-count').textContent = clients.length;
-  document.getElementById('kpi-clients').textContent = clients.length;
+  const {data}=await sb.from('profiles').select('*').eq('trainer_id',currentTrainerId);
+  clients=data||[];
+  document.getElementById('client-count').textContent=clients.length;
+  document.getElementById('kpi-clients').textContent=clients.length;
   renderClients();
 }
 
 async function loadWorkouts(){
-  const {data} = await sb.from('workouts').select('*').eq('trainer_id',currentTrainerId).is('client_id',null);
-  workouts = data || [];
-  document.getElementById('kpi-workouts').textContent = workouts.length;
+  const {data}=await sb.from('workouts').select('*').eq('trainer_id',currentTrainerId).is('client_id',null);
+  workouts=data||[];
+  document.getElementById('kpi-workouts').textContent=workouts.length;
   renderWorkouts();
 }
 
 async function loadDiets(){
-  const {data} = await sb.from('diet_plans').select('*').eq('trainer_id',currentTrainerId).is('client_id',null);
-  diets = data || [];
-  document.getElementById('kpi-diets').textContent = diets.length;
+  const {data}=await sb.from('diet_plans').select('*').eq('trainer_id',currentTrainerId).is('client_id',null);
+  diets=data||[];
+  document.getElementById('kpi-diets').textContent=diets.length;
   renderDiets();
 }
 
 async function loadStats(){
-  const {data} = await sb.from('messages').select('*').eq('to_id',currentTrainerId).eq('read',false);
-  document.getElementById('kpi-msgs').textContent = (data||[]).length;
+  const {data}=await sb.from('messages').select('*').eq('to_id',currentTrainerId).eq('read',false);
+  document.getElementById('kpi-msgs').textContent=(data||[]).length;
 }
 
 function renderClients(){
-  const grid = document.getElementById('clients-grid');
-  const addBtn = '<div class="cc" style="border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;min-height:140px" onclick="openModal(\'modal-add\')"><div style="text-align:center;color:var(--muted)"><div style="font-size:24px;margin-bottom:6px">+</div><div style="font-size:12px">Añadir cliente</div></div></div>';
+  const grid=document.getElementById('clients-grid');
+  const addBtn='<div class="cc" style="border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;min-height:140px" onclick="openModal(\'modal-add\')"><div style="text-align:center;color:var(--muted)"><div style="font-size:24px;margin-bottom:6px">+</div><div style="font-size:12px">Añadir cliente</div></div></div>';
   if(!clients.length){grid.innerHTML=addBtn;return;}
   const colors=[['#ECFDF5','#059669'],['#EFF6FF','#2563EB'],['#F5F3FF','#7C3AED'],['#FFFBEB','#D97706'],['#FEF2F2','#DC2626']];
-  grid.innerHTML = clients.map((c,i)=>{
+  grid.innerHTML=clients.map((c,i)=>{
     const [bg,col]=colors[i%colors.length];
     const initials=(c.name||c.email).substring(0,2).toUpperCase();
     return `<div class="cc ${selectedClientId===c.id?'sel':''}" onclick="selectClient('${c.id}')">
@@ -417,42 +411,41 @@ function renderClients(){
 }
 
 function renderWorkouts(){
-  const grid = document.getElementById('workouts-grid');
+  const grid=document.getElementById('workouts-grid');
   if(!workouts.length){grid.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-icon">🏋️</div><p>Sin rutinas creadas</p></div>';return;}
-  grid.innerHTML = workouts.map(w=>`
+  grid.innerHTML=workouts.map(w=>`
     <div class="rut-card">
       <button style="position:absolute;top:10px;right:10px;background:rgba(242,92,84,0.1);border:none;color:var(--red);border-radius:6px;padding:3px 7px;font-size:10px;cursor:pointer" onclick="deleteWorkout('${w.id}')">Eliminar</button>
       <div class="rut-tag">${w.status||'Rutina'}</div>
       <div class="rut-name">${w.title}</div>
-      <div class="rut-meta">${w.exercises?JSON.parse(w.exercises||'[]').length:0} ejercicios</div>
-      <button class="btns btns-a" style="width:100%;padding:8px" onclick="selectedWorkoutId='${w.id}';openModal('modal-assign')">Asignar a cliente</button>
+      <div class="rut-meta">${JSON.parse(w.exercises||'[]').length} ejercicios</div>
+      <button class="btns btns-a" style="width:100%;padding:8px;margin-top:8px" onclick="prepareAssign('${w.id}')">Asignar a cliente</button>
     </div>
   `).join('');
 }
 
 function renderDiets(){
-  const grid = document.getElementById('diets-grid');
+  const grid=document.getElementById('diets-grid');
   if(!diets.length){grid.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-icon">🥗</div><p>Sin planes de dieta</p></div>';return;}
-  grid.innerHTML = diets.map(d=>`
+  grid.innerHTML=diets.map(d=>`
     <div class="rut-card" style="border-top-color:var(--purple)">
       <button style="position:absolute;top:10px;right:10px;background:rgba(242,92,84,0.1);border:none;color:var(--red);border-radius:6px;padding:3px 7px;font-size:10px;cursor:pointer" onclick="deleteDiet('${d.id}')">Eliminar</button>
       <div class="rut-tag">Plan nutricional</div>
       <div class="rut-name">${d.title}</div>
       <div class="rut-meta">${d.calories||0} kcal · P:${d.protein||0}g C:${d.carbs||0}g G:${d.fats||0}g</div>
-      <button class="btns btns-a" style="width:100%;padding:8px;background:var(--purple);border-color:var(--purple)" onclick="selectedDietId='${d.id}';openModal('modal-assign-diet')">Asignar a cliente</button>
+      <button class="btns btns-a" style="width:100%;padding:8px;margin-top:8px;background:var(--purple);border-color:var(--purple)" onclick="prepareDietAssign('${d.id}')">Asignar a cliente</button>
     </div>
   `).join('');
 }
 
 async function selectClient(id){
-  selectedClientId = id;
-  const c = clients.find(x=>x.id===id);
+  selectedClientId=id;
+  const c=clients.find(x=>x.id===id);
   if(!c)return;
   const colors=[['#ECFDF5','#059669'],['#EFF6FF','#2563EB'],['#F5F3FF','#7C3AED'],['#FFFBEB','#D97706'],['#FEF2F2','#DC2626']];
   const i=clients.indexOf(c);
   const [bg,col]=colors[i%colors.length];
-  const initials=(c.name||c.email).substring(0,2).toUpperCase();
-  document.getElementById('d-av').textContent=initials;
+  document.getElementById('d-av').textContent=(c.name||c.email).substring(0,2).toUpperCase();
   document.getElementById('d-av').style.background=bg;
   document.getElementById('d-av').style.color=col;
   document.getElementById('d-name').textContent=c.name||c.email;
@@ -472,7 +465,7 @@ async function loadClientWorkouts(id){
   el.innerHTML=data.map(w=>`
     <div class="exr" style="margin-bottom:8px">
       <div class="exi"><div class="exnm">${w.title}</div><div class="exs">${w.date||''} · ${w.status}</div></div>
-      <span class="pill ${w.status==='completed'?'p-g':w.status==='pending'?'p-a':'p-r'}">${w.status==='completed'?'Completado':w.status==='pending'?'Pendiente':'En progreso'}</span>
+      <span class="pill ${w.status==='completed'?'p-g':'p-a'}">${w.status==='completed'?'Completado':'Pendiente'}</span>
     </div>
   `).join('');
 }
@@ -480,11 +473,11 @@ async function loadClientWorkouts(id){
 async function loadClientDiets(id){
   const {data}=await sb.from('diet_plans').select('*').eq('client_id',id);
   const el=document.getElementById('client-diets');
-  if(!data||!data.length){el.innerHTML='<div class="empty"><div class="empty-icon">🥗</div><p>Sin plan de dieta asignado</p></div>';return;}
+  if(!data||!data.length){el.innerHTML='<div class="empty"><div class="empty-icon">🥗</div><p>Sin plan asignado</p></div>';return;}
   el.innerHTML=data.map(d=>`
     <div class="note note-g" style="margin-bottom:8px">
       <div class="note-lbl">${d.title}</div>
-      ${d.calories} kcal · Proteína: ${d.protein}g · Hidratos: ${d.carbs}g · Grasas: ${d.fats}g
+      ${d.calories} kcal · P:${d.protein}g · C:${d.carbs}g · G:${d.fats}g
     </div>
   `).join('');
 }
@@ -494,9 +487,9 @@ async function loadClientProgress(id){
   const el=document.getElementById('client-progress');
   if(!data||!data.length){el.innerHTML='<div class="empty"><div class="empty-icon">📊</div><p>Sin datos de progreso</p></div>';return;}
   el.innerHTML=`<div class="m4s">${data.slice(0,1).map(p=>`
-    <div class="m4"><div class="m4v">${p.weight||'-'}</div><div class="m4l">Peso (kg)</div></div>
+    <div class="m4"><div class="m4v">${p.weight||'-'}</div><div class="m4l">Peso kg</div></div>
     <div class="m4"><div class="m4v">${p.body_fat||'-'}%</div><div class="m4l">% Grasa</div></div>
-    <div class="m4"><div class="m4v">${p.muscle_mass||'-'}</div><div class="m4l">Masa musc.</div></div>
+    <div class="m4"><div class="m4v">${p.muscle_mass||'-'}</div><div class="m4l">Músculo kg</div></div>
   `).join('')}</div>`+data.map(p=>`
     <div class="note note-b" style="margin-bottom:6px">
       <div class="note-lbl">${new Date(p.date).toLocaleDateString('es')}</div>
@@ -506,29 +499,34 @@ async function loadClientProgress(id){
 }
 
 async function loadClientMessages(id){
-  const {data}=await sb.from('messages').select('*').or(`from_id.eq.${currentTrainerId},to_id.eq.${currentTrainerId}`).or(`from_id.eq.${id},to_id.eq.${id}`).order('created_at',{ascending:true});
+  const {data}=await sb.from('messages').select('*')
+    .or(`and(from_id.eq.${currentTrainerId},to_id.eq.${id}),and(from_id.eq.${id},to_id.eq.${currentTrainerId})`)
+    .order('created_at',{ascending:true});
   const el=document.getElementById('client-messages-list');
   if(!data||!data.length){el.innerHTML='<div class="empty"><div class="empty-icon">💬</div><p>Sin mensajes</p></div>';return;}
   el.innerHTML=data.map(m=>`
-    <div style="padding:10px 13px;border-radius:9px;${m.from_id===currentTrainerId?'background:#ECFDF5;border-left:3px solid #059669':'background:#EFF6FF;border-left:3px solid #3B82F6'}">
-      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;color:${m.from_id===currentTrainerId?'#059669':'#2563EB'}">${m.from_id===currentTrainerId?'Tú':'Cliente'} · ${new Date(m.created_at).toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'})}</div>
+    <div style="padding:10px 13px;border-radius:9px;margin-bottom:6px;${m.from_id===currentTrainerId?'background:#ECFDF5;border-left:3px solid #059669':'background:#EFF6FF;border-left:3px solid #3B82F6'}">
+      <div style="font-size:9px;font-weight:700;text-transform:uppercase;margin-bottom:3px;color:${m.from_id===currentTrainerId?'#059669':'#2563EB'}">${m.from_id===currentTrainerId?'Tú':'Cliente'} · ${new Date(m.created_at).toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'})}</div>
       ${m.content}
     </div>
   `).join('');
 }
 
-// ACTIONS
 async function addClient(){
   const email=document.getElementById('add-email').value.trim();
   const name=document.getElementById('add-name').value.trim();
-  const goal=document.getElementById('add-goal').value;
   if(!email){showToast('Introduce el email del cliente');return;}
-  const {data,error}=await sb.from('profiles').insert({id:crypto.randomUUID(),role:'client',name,email,trainer_id:currentTrainerId}).select().single();
-  if(error){showToast('Error: '+error.message);return;}
+  const {data:existing}=await sb.from('profiles').select('*').eq('email',email).maybeSingle();
+  if(existing){
+    await sb.from('profiles').update({trainer_id:currentTrainerId,name:name||existing.name}).eq('id',existing.id);
+    showToast('Cliente vinculado correctamente');
+  } else {
+    await sb.from('profiles').insert({id:crypto.randomUUID(),role:'client',name,email,trainer_id:currentTrainerId});
+    showToast('Cliente añadido. Pídele que se registre con este email.');
+  }
   closeModal('modal-add');
   document.getElementById('add-email').value='';
   document.getElementById('add-name').value='';
-  showToast('Cliente añadido correctamente');
   await loadClients();
 }
 
@@ -585,8 +583,24 @@ async function deleteDiet(id){
   await loadDiets();
 }
 
-let selectedWorkoutId=null;
-let selectedDietId=null;
+let selectedWorkoutId=null,selectedDietId=null;
+
+function prepareAssign(id){
+  selectedWorkoutId=id;
+  if(!clients.length){showToast('Añade clientes primero');return;}
+  const sel=document.getElementById('assign-workout-sel');
+  sel.innerHTML=workouts.map(w=>`<option value="${w.id}" ${w.id===id?'selected':''}>${w.title}</option>`).join('');
+  document.getElementById('assign-date').value=new Date().toISOString().split('T')[0];
+  openModal('modal-assign');
+}
+
+function prepareDietAssign(id){
+  selectedDietId=id;
+  if(!clients.length){showToast('Añade clientes primero');return;}
+  const sel=document.getElementById('assign-diet-sel');
+  sel.innerHTML=diets.map(d=>`<option value="${d.id}" ${d.id===id?'selected':''}>${d.title}</option>`).join('');
+  openModal('modal-assign-diet');
+}
 
 function openAssignModal(){
   if(!selectedClientId){showToast('Selecciona un cliente primero');return;}
@@ -607,21 +621,22 @@ async function assignWorkout(){
   const woId=document.getElementById('assign-workout-sel').value;
   const date=document.getElementById('assign-date').value;
   const wo=workouts.find(w=>w.id===woId);
-  if(!wo||!selectedClientId)return;
-  await sb.from('workouts').insert({trainer_id:currentTrainerId,client_id:selectedClientId,title:wo.title,exercises:wo.exercises,date,status:'pending'});
+  const clientId=selectedClientId||clients[0]?.id;
+  if(!wo||!clientId){showToast('Selecciona un cliente primero');return;}
+  await sb.from('workouts').insert({trainer_id:currentTrainerId,client_id:clientId,title:wo.title,exercises:wo.exercises,date,status:'pending'});
   closeModal('modal-assign');
-  showToast('Rutina asignada al cliente');
-  await loadClientWorkouts(selectedClientId);
+  showToast('Rutina asignada');
+  if(selectedClientId)await loadClientWorkouts(selectedClientId);
 }
-
 async function assignDiet(){
   const dietId=document.getElementById('assign-diet-sel').value;
   const diet=diets.find(d=>d.id===dietId);
-  if(!diet||!selectedClientId)return;
-  await sb.from('diet_plans').insert({trainer_id:currentTrainerId,client_id:selectedClientId,title:diet.title,calories:diet.calories,protein:diet.protein,carbs:diet.carbs,fats:diet.fats,meals:diet.meals});
+  const clientId=selectedClientId||clients[0]?.id;
+  if(!diet||!clientId){showToast('Selecciona un cliente primero');return;}
+  await sb.from('diet_plans').insert({trainer_id:currentTrainerId,client_id:clientId,title:diet.title,calories:diet.calories,protein:diet.protein,carbs:diet.carbs,fats:diet.fats,meals:diet.meals});
   closeModal('modal-assign-diet');
-  showToast('Dieta asignada al cliente');
-  await loadClientDiets(selectedClientId);
+  showToast('Dieta asignada');
+  if(selectedClientId)await loadClientDiets(selectedClientId);
 }
 
 async function sendMessage(){
@@ -648,7 +663,7 @@ async function sendMsgModal(){
 }
 
 async function saveProgress(){
-  if(!selectedClientId)return;
+  if(!selectedClientId){showToast('Selecciona un cliente primero');return;}
   await sb.from('progress').insert({
     client_id:selectedClientId,
     weight:parseFloat(document.getElementById('prog-weight').value)||null,
