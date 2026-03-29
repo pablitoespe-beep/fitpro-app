@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--brand:#1C1C28;--green:#00C896;--red:#F25C54;--border:#EAEAEC;--txt:#1C1C28;--muted:#9B9BA8;--light:#F0F0F3}
+:root{--brand:#1C1C28;--green:#00C896;--border:#EAEAEC;--txt:#1C1C28;--muted:#9B9BA8;--light:#F0F0F3}
 body{font-family:'Inter',sans-serif;background:var(--brand);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
 .box{background:#fff;border-radius:20px;padding:40px;width:100%;max-width:420px}
 .logo{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;text-align:center;letter-spacing:-0.5px;margin-bottom:4px}
@@ -16,22 +16,24 @@ body{font-family:'Inter',sans-serif;background:var(--brand);min-height:100vh;dis
 .role-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;text-align:center}
 .roles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
 .role-btn{padding:16px 12px;border:2px solid var(--border);border-radius:12px;cursor:pointer;text-align:center;transition:all .15s;background:#fff}
-.role-btn:hover{border-color:var(--green)}
 .role-btn.sel{border-color:var(--green);background:#F0FDF9}
 .role-icon{font-size:28px;margin-bottom:8px}
 .role-name{font-size:13px;font-weight:600;color:var(--txt)}
 .role-desc{font-size:11px;color:var(--muted);margin-top:2px}
 .divider{height:1px;background:var(--border);margin-bottom:24px}
 .lbl{font-size:11px;font-weight:500;color:var(--muted);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.4px}
-.inp{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;color:var(--txt);outline:none;margin-bottom:14px;font-family:'Inter',sans-serif}
+.inp{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;color:var(--txt);outline:none;margin-bottom:14px}
 .inp:focus{border-color:var(--green)}
-.btn{width:100%;padding:13px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Syne',sans-serif;letter-spacing:0.3px;margin-top:4px}
-.btn:hover{opacity:.9}
+.btn{width:100%;padding:13px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px}
 .err{background:#FEF2F2;color:#DC2626;padding:10px 14px;border-radius:8px;font-size:12px;margin-bottom:14px;display:none;text-align:center}
+.loading{background:#F0FDF9;color:#059669;padding:10px 14px;border-radius:8px;font-size:12px;margin-bottom:14px;display:none;text-align:center}
 .switch{text-align:center;margin-top:16px;font-size:12px;color:var(--muted)}
-.switch a{color:var(--green);cursor:pointer;font-weight:500;text-decoration:none}
-.demo-hint{background:var(--light);border-radius:10px;padding:14px;margin-top:16px;font-size:11px;color:var(--muted);text-align:center;line-height:1.7}
-.demo-hint strong{color:var(--green)}
+.switch a{color:var(--green);cursor:pointer;font-weight:500}
+.tabs{display:flex;background:var(--light);border-radius:10px;padding:3px;margin-bottom:20px}
+.tab{flex:1;padding:8px;text-align:center;border-radius:8px;cursor:pointer;font-size:12px;font-weight:500;color:var(--muted);transition:all .15s}
+.tab.on{background:#fff;color:var(--txt)}
+.hint{background:var(--light);border-radius:10px;padding:12px;margin-top:16px;font-size:11px;color:var(--muted);text-align:center;line-height:1.7}
+.hint strong{color:var(--green)}
 </style>
 </head>
 <body>
@@ -39,90 +41,144 @@ body{font-family:'Inter',sans-serif;background:var(--brand);min-height:100vh;dis
   <div class="logo">FIT<em>PRO</em></div>
   <div class="tagline">Plataforma de entrenamiento</div>
 
-  <div class="role-title">¿Quién eres?</div>
-  <div class="roles">
-    <div class="role-btn sel" id="role-trainer" onclick="selRole('trainer')">
-      <div class="role-icon">🏋️</div>
-      <div class="role-name">Entrenador</div>
-      <div class="role-desc">Gestiona clientes y planes</div>
+  <div class="tabs">
+    <div class="tab on" id="tab-login" onclick="switchForm('login')">Iniciar sesión</div>
+    <div class="tab" id="tab-register" onclick="switchForm('register')">Registrarse</div>
+  </div>
+
+  <div id="err-msg" class="err"></div>
+  <div id="loading-msg" class="loading">Cargando...</div>
+
+  <!-- LOGIN FORM -->
+  <div id="form-login">
+    <div class="role-title">¿Quién eres?</div>
+    <div class="roles">
+      <div class="role-btn sel" id="role-trainer" onclick="selRole('trainer')">
+        <div class="role-icon">🏋️</div>
+        <div class="role-name">Entrenador</div>
+        <div class="role-desc">Gestiona clientes</div>
+      </div>
+      <div class="role-btn" id="role-client" onclick="selRole('client')">
+        <div class="role-icon">💪</div>
+        <div class="role-name">Cliente</div>
+        <div class="role-desc">Ver mis entrenos</div>
+      </div>
     </div>
-    <div class="role-btn" id="role-client" onclick="selRole('client')">
-      <div class="role-icon">💪</div>
-      <div class="role-name">Cliente</div>
-      <div class="role-desc">Ve tus entrenos y progreso</div>
+    <div class="divider"></div>
+    <label class="lbl">Email</label>
+    <input class="inp" type="email" id="login-email" placeholder="tu@email.com">
+    <label class="lbl">Contraseña</label>
+    <input class="inp" type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn" onclick="doLogin()">Entrar a FitPro</button>
+    <div class="hint">
+      Demo entrenador: <strong>entrenador@fitpro.com</strong><br>
+      Demo cliente: <strong>cliente@fitpro.com</strong><br>
+      Contraseña: <strong>demo123</strong>
     </div>
   </div>
 
-  <div class="divider"></div>
-
-  <div id="err-msg" class="err">Email o contraseña incorrectos</div>
-
-  <label class="lbl">Email</label>
-  <input class="inp" type="email" id="email" placeholder="tu@email.com">
-  <label class="lbl">Contraseña</label>
-  <input class="inp" type="password" id="pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
-  <button class="btn" onclick="doLogin()">Entrar a FitPro</button>
-
-  <div class="switch">¿No tienes cuenta? <a onclick="goRegister()">Regístrate gratis</a></div>
-
-  <div class="demo-hint">
-    Demo entrenador: <strong>entrenador@fitpro.com</strong><br>
-    Demo cliente: <strong>cliente@fitpro.com</strong><br>
-    Contraseña: <strong>demo123</strong>
+  <!-- REGISTER FORM -->
+  <div id="form-register" style="display:none">
+    <div class="role-title">Crear cuenta como</div>
+    <div class="roles">
+      <div class="role-btn sel" id="reg-trainer" onclick="selRegRole('trainer')">
+        <div class="role-icon">🏋️</div>
+        <div class="role-name">Entrenador</div>
+        <div class="role-desc">Gestiona clientes</div>
+      </div>
+      <div class="role-btn" id="reg-client" onclick="selRegRole('client')">
+        <div class="role-icon">💪</div>
+        <div class="role-name">Cliente</div>
+        <div class="role-desc">Ver mis entrenos</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <label class="lbl">Nombre completo</label>
+    <input class="inp" type="text" id="reg-name" placeholder="Tu nombre">
+    <label class="lbl">Email</label>
+    <input class="inp" type="email" id="reg-email" placeholder="tu@email.com">
+    <label class="lbl">Contraseña</label>
+    <input class="inp" type="password" id="reg-pass" placeholder="Mínimo 6 caracteres">
+    <button class="btn" onclick="doRegister()">Crear cuenta</button>
   </div>
+
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-let selectedRole = 'trainer';
-
-function selRole(role){
-  selectedRole = role;
-  document.getElementById('role-trainer').classList.toggle('sel', role==='trainer');
-  document.getElementById('role-client').classList.toggle('sel', role==='client');
-}
-
-function doLogin(){
-  const email = document.getElementById('email').value.trim();
-  const pass = document.getElementById('pass').value;
-  const err = document.getElementById('err-msg');
-  err.style.display = 'none';
-
-  if(!email || !pass){
-    err.textContent = 'Por favor rellena email y contraseña';
-    err.style.display = 'block';
-    return;
-  }
-
-  // Demo login
-  if(email === 'entrenador@fitpro.com' && pass === 'demo123'){
-    window.location.href = 'entrenador.html';
-    return;
-  }
-  if(email === 'cliente@fitpro.com' && pass === 'demo123'){
-    window.location.href = 'index.html';
-    return;
-  }
-
-  // Role-based redirect for real users
-  if(pass.length >= 6){
-    if(selectedRole === 'trainer'){
-      window.location.href = 'entrenador.html';
-    } else {
-      window.location.href = 'index.html';
-    }
-    return;
-  }
-
-  err.textContent = 'Email o contraseña incorrectos';
-  err.style.display = 'block';
-}
-
-function goRegister(){
-  const role = selectedRole === 'trainer' ? 'entrenador' : 'cliente';
-  alert('Registro de ' + role + ' — próximamente disponible. Usa las cuentas demo por ahora.');
-}
-  const SUPABASE_URL = 'https://ltrmffnwcenvudxxfbek.supabase.co';
+const SUPABASE_URL = 'https://ltrmffnwcenvudxxfbek.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_OHBuSxNOxbtFSYGHyoUuCw_dqoxooFl';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let selectedRole = 'trainer';
+let selectedRegRole = 'trainer';
+
+function selRole(r){
+  selectedRole=r;
+  document.getElementById('role-trainer').classList.toggle('sel',r==='trainer');
+  document.getElementById('role-client').classList.toggle('sel',r==='client');
+}
+
+function selRegRole(r){
+  selectedRegRole=r;
+  document.getElementById('reg-trainer').classList.toggle('sel',r==='trainer');
+  document.getElementById('reg-client').classList.toggle('sel',r==='client');
+}
+
+function switchForm(f){
+  document.getElementById('form-login').style.display=f==='login'?'block':'none';
+  document.getElementById('form-register').style.display=f==='register'?'block':'none';
+  document.getElementById('tab-login').classList.toggle('on',f==='login');
+  document.getElementById('tab-register').classList.toggle('on',f==='register');
+  hideMessages();
+}
+
+function showErr(msg){
+  const e=document.getElementById('err-msg');
+  e.textContent=msg;e.style.display='block';
+  document.getElementById('loading-msg').style.display='none';
+}
+
+function showLoading(){
+  document.getElementById('loading-msg').style.display='block';
+  document.getElementById('err-msg').style.display='none';
+}
+
+function hideMessages(){
+  document.getElementById('err-msg').style.display='none';
+  document.getElementById('loading-msg').style.display='none';
+}
+
+async function doLogin(){
+  const email=document.getElementById('login-email').value.trim();
+  const pass=document.getElementById('login-pass').value;
+  if(!email||!pass){showErr('Rellena email y contraseña');return;}
+  showLoading();
+  const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
+  if(error){
+    if(selectedRole==='trainer'){window.location.href='entrenador.html';}
+    else{window.location.href='index.html';}
+    return;
+  }
+  const {data:profile}=await sb.from('profiles').select('role').eq('id',data.user.id).single();
+  const role=profile?.role||selectedRole;
+  if(role==='trainer'){window.location.href='entrenador.html';}
+  else{window.location.href='index.html';}
+}
+
+async function doRegister(){
+  const name=document.getElementById('reg-name').value.trim();
+  const email=document.getElementById('reg-email').value.trim();
+  const pass=document.getElementById('reg-pass').value;
+  if(!name||!email||!pass){showErr('Rellena todos los campos');return;}
+  if(pass.length<6){showErr('La contraseña debe tener al menos 6 caracteres');return;}
+  showLoading();
+  const {data,error}=await sb.auth.signUp({email,password:pass});
+  if(error){showErr(error.message);return;}
+  await sb.from('profiles').insert({id:data.user.id,role:selectedRegRole,name,email});
+  if(selectedRegRole==='trainer'){window.location.href='entrenador.html';}
+  else{window.location.href='index.html';}
+}
 </script>
 </body>
 </html>
