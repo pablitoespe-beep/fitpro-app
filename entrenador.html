@@ -31,7 +31,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);font-s
 .topbar{background:var(--w);border-bottom:1.5px solid var(--border);height:56px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .tb-t{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.2px}
 .tb-r{display:flex;align-items:center;gap:10px}
-.tb-search{display:flex;align-items:center;gap:7px;background:var(--light);border:1.5px solid var(--border);border-radius:8px;padding:7px 12px;font-size:12px;color:var(--muted);min-width:180px}
 .tb-btn{background:var(--green);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer}
 .body{flex:1;overflow-y:auto;padding:22px 24px}
 .pg{display:none}.pg.on{display:block}
@@ -40,8 +39,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);font-s
 .kpi-l{font-size:10px;font-weight:600;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px}
 .kpi-v{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;letter-spacing:-0.5px;line-height:1}
 .kpi-s{font-size:11px;margin-top:6px;font-weight:500}
-.kpi-bar{height:3px;background:var(--light);border-radius:2px;margin-top:10px}
-.kpi-bf{height:100%;border-radius:2px}
 .g2{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:14px;margin-bottom:14px}
 .g22{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
 .card{background:var(--w);border:1.5px solid var(--border);border-radius:12px;padding:18px;margin-bottom:14px}
@@ -49,8 +46,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);font-s
 .ct{font-family:'Syne',sans-serif;font-size:13px;font-weight:700}
 .ca{font-size:11px;color:var(--muted);cursor:pointer;padding:5px 10px;border:1.5px solid var(--border);border-radius:7px;background:transparent}
 .ccards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin-bottom:16px}
-.cc{background:var(--w);border:1.5px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;transition:all .15s}
+.cc{background:var(--w);border:1.5px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;transition:all .15s;position:relative}
 .cc:hover,.cc.sel{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,200,150,0.08)}
+.cc-del{position:absolute;top:10px;right:10px;background:rgba(242,92,84,0.1);border:none;color:var(--red);border-radius:6px;padding:3px 7px;font-size:10px;cursor:pointer;display:none}
+.cc:hover .cc-del{display:block}
 .cc-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .av{border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;flex-shrink:0}
 .av-sm{width:34px;height:34px;font-size:11px}
@@ -71,6 +70,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);font-s
 .d-acts{margin-left:auto;display:flex;gap:7px}
 .btns{padding:7px 14px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;border:1.5px solid var(--border);background:transparent}
 .btns-a{background:var(--green);color:#fff;border-color:var(--green)}
+.btns-r{background:var(--red);color:#fff;border-color:var(--red)}
 .tabs{display:flex;border-bottom:1.5px solid var(--border)}
 .tab{padding:10px 15px;font-size:12px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
 .tab.on{color:var(--txt);border-bottom-color:var(--green);font-weight:600}
@@ -91,40 +91,34 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);font-s
 .sch{display:flex;align-items:center;gap:10px;padding:10px 13px;border-radius:9px;border-left:3px solid var(--green);background:rgba(0,200,150,0.04);margin-bottom:6px}
 .sch-t{font-size:10px;font-weight:700;color:var(--muted);width:42px;flex-shrink:0}
 .sch-i{flex:1}.sch-n{font-size:12px;font-weight:500}.sch-s{font-size:10px;color:var(--muted);margin-top:1px}
-.bars{display:flex;align-items:flex-end;gap:6px;height:75px;margin-bottom:6px}
-.br{flex:1;border-radius:4px 4px 0 0;background:var(--light)}.br.on{background:var(--green)}
-.brlbs{display:flex;gap:6px}.brlb{flex:1;text-align:center;font-size:9px;color:var(--muted)}
-.rk{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1.5px solid var(--border)}
-.rk:last-child{border-bottom:none}
-.rk-n{font-size:11px;font-weight:700;width:20px;color:var(--muted)}
-.rk-nm{flex:1;font-size:12px;font-weight:500}.rk-v{font-size:12px;font-weight:700;color:var(--green)}
-.alt{padding:10px 12px;border-radius:9px;margin-bottom:7px;border-left:3px solid}
-.alt-n{font-size:11px;font-weight:600;margin-bottom:2px}.alt-m{font-size:10px}
 .note{padding:10px 13px;border-radius:9px;font-size:12px;line-height:1.5;margin-bottom:8px;border-left:3px solid}
 .note-g{background:#ECFDF5;color:#065F46;border-color:#059669}
 .note-b{background:#EFF6FF;color:#1E3A8A;border-color:#3B82F6}
 .note-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px}
-.fi{padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;background:var(--light);color:var(--txt);outline:none}
+.fi{padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;background:var(--light);color:var(--txt);outline:none;font-family:'Inter',sans-serif}
 .fi:focus{border-color:var(--green)}
-.ta{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;background:var(--light);color:var(--txt);resize:none;min-height:70px;outline:none}
+.ta{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;background:var(--light);color:var(--txt);resize:none;min-height:70px;outline:none;font-family:'Inter',sans-serif}
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(28,28,40,0.45);z-index:200;align-items:center;justify-content:center;padding:20px}
 .modal-bg.open{display:flex}
 .modal{background:#fff;border-radius:16px;padding:24px;width:100%;max-width:460px}
 .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .modal-t{font-family:'Syne',sans-serif;font-size:15px;font-weight:700}
 .modal-x{background:none;border:none;cursor:pointer;color:var(--muted);font-size:18px;line-height:1}
-.fg{margin-bottom:14px}.fl{font-size:11px;font-weight:500;color:var(--muted);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.4px}
-.finp{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;color:var(--txt);outline:none;background:#fff}
+.fg{margin-bottom:14px}
+.fl{font-size:11px;font-weight:500;color:var(--muted);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.4px}
+.finp{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;color:var(--txt);outline:none;background:#fff;font-family:'Inter',sans-serif}
 .finp:focus{border-color:var(--green)}
-.fsel{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;background:#fff;outline:none}
+.fsel{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;background:#fff;outline:none;font-family:'Inter',sans-serif}
 .modal-btn{width:100%;padding:12px;background:var(--green);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;margin-top:4px}
 .rut-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
-.rut-card{background:var(--w);border:1.5px solid var(--border);border-radius:12px;padding:15px;border-top:3px solid var(--green)}
+.rut-card{background:var(--w);border:1.5px solid var(--border);border-radius:12px;padding:15px;border-top:3px solid var(--green);position:relative}
 .rut-tag{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px}
 .rut-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px}
 .rut-meta{font-size:11px;color:var(--muted);margin-bottom:12px}
-.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-.photo-slot{aspect-ratio:3/4;border-radius:9px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:7px}
+.empty{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty-icon{font-size:40px;margin-bottom:12px}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--brand);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:500;z-index:300;display:none;animation:slideUp .3s ease}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
 @media(max-width:900px){.kpis,.ccards,.rut-grid{grid-template-columns:1fr 1fr}.g2,.g22{grid-template-columns:1fr}.m4s{grid-template-columns:1fr 1fr}}
 </style>
 </head>
@@ -136,337 +130,567 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);font-s
     <div class="sb-tag">Panel entrenador</div>
   </div>
   <div class="sb-me">
-    <div class="sb-av">CG</div>
-    <div><div class="sb-nm">Carlos García</div><div class="sb-rol">Entrenador Pro</div></div>
+    <div class="sb-av" id="t-av">CG</div>
+    <div><div class="sb-nm" id="t-nm">Cargando...</div><div class="sb-rol">Entrenador</div></div>
   </div>
   <nav class="sb-nav">
     <div class="sb-sec">Principal</div>
-    <div class="sb-it on" onclick="goPg('resumen',this,'Resumen general','+ Añadir cliente')">
+    <div class="sb-it on" onclick="goPg('resumen',this,'Resumen general')">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" fill="currentColor"/><rect x="8" y="1" width="5" height="5" rx="1" fill="currentColor" opacity=".4"/><rect x="1" y="8" width="5" height="5" rx="1" fill="currentColor" opacity=".4"/><rect x="8" y="8" width="5" height="5" rx="1" fill="currentColor" opacity=".4"/></svg>
       Resumen
     </div>
-    <div class="sb-it" onclick="goPg('clientes',this,'Gestión de clientes','+ Nuevo cliente')">
+    <div class="sb-it" onclick="goPg('clientes',this,'Mis clientes')">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="5" cy="4" r="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M1 12c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="11.5" cy="4" r="1.8" stroke="currentColor" stroke-width="1.4"/></svg>
-      Clientes <span class="sb-badge">5</span>
+      Clientes <span class="sb-badge" id="client-count">0</span>
     </div>
-    <div class="sb-it" onclick="goPg('rutinas',this,'Biblioteca de rutinas','+ Nueva rutina')">
+    <div class="sb-it" onclick="goPg('rutinas',this,'Rutinas')">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="6" width="3" height="7" rx="1" fill="currentColor" opacity=".5"/><rect x="11" y="6" width="3" height="7" rx="1" fill="currentColor" opacity=".5"/><rect x="3" y="8" width="8" height="3" rx="1" fill="currentColor"/></svg>
       Rutinas
     </div>
-    <div class="sb-it" onclick="goPg('dietas',this,'Planes de dieta','+ Nueva dieta')">
+    <div class="sb-it" onclick="goPg('dietas',this,'Planes de dieta')">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4.5 4.5 0 002.5 6c0 1.9 1.2 3.6 2.9 4.2L5 12.5h4l-.4-2.3A4.5 4.5 0 0011.5 6 4.5 4.5 0 007 1.5z" stroke="currentColor" stroke-width="1.4"/></svg>
       Dietas
     </div>
-    <div class="sb-it" onclick="goPg('agenda',this,'Agenda','+ Agendar cita')">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="3" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 2v2M9 2v2M2 6h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      Agenda
+    <div class="sb-it" onclick="goPg('mensajes',this,'Mensajes')">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 13l3-3 3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      Mensajes
     </div>
     <div class="sb-sec">Análisis</div>
-    <div class="sb-it" onclick="goPg('progreso',this,'Progreso global','Exportar')">
+    <div class="sb-it" onclick="goPg('progreso',this,'Progreso global')">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 10l3.5-4 3 2.5 3.5-6L13 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Progreso global
     </div>
   </nav>
   <div class="sb-foot">
-    <div style="background:rgba(0,200,150,0.07);border:1px solid rgba(0,200,150,0.15);border-radius:9px;padding:11px;margin-bottom:8px">
-      <div style="font-size:11px;font-weight:600;color:#fff;margin-bottom:2px">5 de 30 clientes</div>
-      <div style="font-size:10px;color:rgba(255,255,255,0.3)">Plan Pro activo</div>
-    </div>
-    <button class="sb-out" onclick="window.location='index.html'">Cerrar sesión</button>
+    <button class="sb-out" onclick="doLogout()">Cerrar sesión</button>
   </div>
 </div>
 <div class="main">
   <div class="topbar">
     <div class="tb-t" id="pg-title">Resumen general</div>
     <div class="tb-r">
-      <div class="tb-search">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="5" cy="5" r="3.5" stroke="#9B9BA8" stroke-width="1.3"/><path d="M8 8l2.5 2.5" stroke="#9B9BA8" stroke-width="1.3" stroke-linecap="round"/></svg>
-        Buscar cliente...
-      </div>
       <button class="tb-btn" id="top-btn" onclick="openModal('modal-add')">+ Añadir cliente</button>
     </div>
   </div>
   <div class="body">
+
+    <!-- RESUMEN -->
     <div class="pg on" id="pg-resumen">
       <div class="kpis">
-        <div class="kpi"><div class="kpi-l">Clientes activos</div><div class="kpi-v">5</div><div class="kpi-s" style="color:var(--green)">↑ 2 este mes</div><div class="kpi-bar"><div class="kpi-bf" style="width:60%;background:var(--green)"></div></div></div>
-        <div class="kpi"><div class="kpi-l">Adherencia media</div><div class="kpi-v">87%</div><div class="kpi-s" style="color:var(--purple)">↑ 3% vs anterior</div><div class="kpi-bar"><div class="kpi-bf" style="width:87%;background:var(--purple)"></div></div></div>
-        <div class="kpi"><div class="kpi-l">Sesiones esta semana</div><div class="kpi-v">18</div><div class="kpi-s" style="color:var(--amber)">↑ 4 vs semana ant.</div><div class="kpi-bar"><div class="kpi-bf" style="width:75%;background:var(--amber)"></div></div></div>
-        <div class="kpi"><div class="kpi-l">Bajada peso media</div><div class="kpi-v">−2.4kg</div><div class="kpi-s" style="color:var(--green)">Promedio clientes</div><div class="kpi-bar"><div class="kpi-bf" style="width:55%;background:var(--red)"></div></div></div>
+        <div class="kpi"><div class="kpi-l">Clientes activos</div><div class="kpi-v" id="kpi-clients">0</div><div class="kpi-s" style="color:var(--green)">Total registrados</div></div>
+        <div class="kpi"><div class="kpi-l">Rutinas creadas</div><div class="kpi-v" id="kpi-workouts">0</div><div class="kpi-s" style="color:var(--purple)">En biblioteca</div></div>
+        <div class="kpi"><div class="kpi-l">Planes de dieta</div><div class="kpi-v" id="kpi-diets">0</div><div class="kpi-s" style="color:var(--amber)">Disponibles</div></div>
+        <div class="kpi"><div class="kpi-l">Mensajes</div><div class="kpi-v" id="kpi-msgs">0</div><div class="kpi-s" style="color:var(--green)">Sin leer</div></div>
       </div>
-      <div class="g2">
-        <div class="card">
-          <div class="ch"><div class="ct">Adherencia semanal</div></div>
-          <div class="bars"><div class="br" style="height:58%"></div><div class="br" style="height:82%"></div><div class="br" style="height:67%"></div><div class="br on" style="height:95%"></div><div class="br" style="height:42%"></div><div class="br" style="height:78%"></div><div class="br" style="height:30%"></div></div>
-          <div class="brlbs"><span class="brlb">Lun</span><span class="brlb">Mar</span><span class="brlb">Mié</span><span class="brlb">Jue</span><span class="brlb">Vie</span><span class="brlb">Sáb</span><span class="brlb">Dom</span></div>
-        </div>
-        <div class="card">
-          <div class="ch"><div class="ct">Ranking adherencia</div></div>
-          <div class="rk"><div class="rk-n">#1</div><div class="av av-sm" style="background:#ECFDF5;color:#059669">LP</div><div class="rk-nm">Laura Pérez</div><div class="rk-v">96%</div></div>
-          <div class="rk"><div class="rk-n">#2</div><div class="av av-sm" style="background:#EFF6FF;color:#2563EB">SR</div><div class="rk-nm">Sara Ruiz</div><div class="rk-v">94%</div></div>
-          <div class="rk"><div class="rk-n">#3</div><div class="av av-sm" style="background:#F5F3FF;color:#7C3AED">MF</div><div class="rk-nm">Miguel Fernández</div><div class="rk-v">91%</div></div>
-          <div class="rk"><div class="rk-n">#4</div><div class="av av-sm" style="background:#FFFBEB;color:#D97706">AL</div><div class="rk-nm">Ana López</div><div class="rk-v" style="color:var(--red)">78%</div></div>
-          <div class="rk"><div class="rk-n">#5</div><div class="av av-sm" style="background:#FEF2F2;color:#DC2626">JM</div><div class="rk-nm">Juan Morales</div><div class="rk-v" style="color:var(--red)">65%</div></div>
-        </div>
-      </div>
-      <div class="g22">
-        <div class="card">
-          <div class="ch"><div class="ct">Agenda hoy — vie 27 marzo</div><button class="ca">Ver semana</button></div>
-          <div class="sch"><div class="sch-t">09:00</div><div class="sch-i"><div class="sch-n">Sara Ruiz</div><div class="sch-s">Fuerza + HIIT · 60 min</div></div><span class="pill p-g">Confirmada</span></div>
-          <div class="sch" style="border-left-color:var(--red)"><div class="sch-t">11:30</div><div class="sch-i"><div class="sch-n">Miguel Fernández</div><div class="sch-s">Pecho y tríceps · 75 min</div></div><span class="pill p-g">Confirmada</span></div>
-          <div class="sch" style="border-left-color:var(--amber)"><div class="sch-t">17:00</div><div class="sch-i"><div class="sch-n">Ana López</div><div class="sch-s">Check-in mensual · 30 min</div></div><span class="pill p-a">Pendiente</span></div>
-          <div class="sch"><div class="sch-t">19:30</div><div class="sch-i"><div class="sch-n">Laura Pérez</div><div class="sch-s">Sentadilla 5/3/1 · 90 min</div></div><span class="pill p-g">Confirmada</span></div>
-        </div>
-        <div class="card">
-          <div class="ch"><div class="ct">Alertas</div></div>
-          <div class="alt" style="background:#FFFBEB;border-color:var(--amber)"><div class="alt-n" style="color:#92400E">Ana López</div><div class="alt-m" style="color:#92400E">4 días sin registrar entreno</div></div>
-          <div class="alt" style="background:#FEF2F2;border-color:var(--red)"><div class="alt-n" style="color:#991B1B">Juan Morales</div><div class="alt-m" style="color:#991B1B">Adherencia por debajo del 70%</div></div>
-          <div class="alt" style="background:#ECFDF5;border-color:var(--green)"><div class="alt-n" style="color:#065F46">Laura Pérez</div><div class="alt-m" style="color:#065F46">Nuevo récord: Peso muerto 90 kg</div></div>
+      <div class="card">
+        <div class="ch"><div class="ct">Bienvenido a FitPro</div></div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7">Empieza añadiendo tus primeros clientes. Luego podrás asignarles rutinas, planes de dieta, hacer seguimiento de su progreso y enviarles mensajes directamente.</p>
+        <div style="display:flex;gap:10px;margin-top:16px">
+          <button class="btns btns-a" onclick="openModal('modal-add')">+ Añadir primer cliente</button>
+          <button class="btns" onclick="openModal('modal-workout')">+ Crear rutina</button>
+          <button class="btns" onclick="openModal('modal-diet')">+ Crear plan de dieta</button>
         </div>
       </div>
     </div>
+
+    <!-- CLIENTES -->
     <div class="pg" id="pg-clientes">
-      <div class="ccards">
-        <div class="cc sel" onclick="selClient(this,'Sara Ruiz','SR','#ECFDF5','#059669','28 años · Pérdida de peso · Semana 8')">
-          <div class="cc-top"><div class="av av-sm" style="background:#ECFDF5;color:#059669">SR</div><div><div class="cc-nm">Sara Ruiz</div><div class="cc-g">Pérdida de peso</div></div></div>
-          <div class="cc-ms"><div class="cm"><div class="cmv" style="color:var(--green)">−4.2</div><div class="cml">kg total</div></div><div class="cm"><div class="cmv">94%</div><div class="cml">adher.</div></div><div class="cm"><div class="cmv">Sem 8</div><div class="cml">semana</div></div></div>
-          <div class="cc-foot"><span class="pill p-g">Activo</span><span style="font-size:10px;color:var(--muted)">Hoy</span></div>
-        </div>
-        <div class="cc" onclick="selClient(this,'Miguel Fernández','MF','#F5F3FF','#7C3AED','31 años · Hipertrofia · Semana 12')">
-          <div class="cc-top"><div class="av av-sm" style="background:#F5F3FF;color:#7C3AED">MF</div><div><div class="cc-nm">Miguel Fernández</div><div class="cc-g">Hipertrofia</div></div></div>
-          <div class="cc-ms"><div class="cm"><div class="cmv" style="color:var(--green)">+3.1</div><div class="cml">kg masa</div></div><div class="cm"><div class="cmv">91%</div><div class="cml">adher.</div></div><div class="cm"><div class="cmv">Sem 12</div><div class="cml">semana</div></div></div>
-          <div class="cc-foot"><span class="pill p-g">Activo</span><span style="font-size:10px;color:var(--muted)">Ayer</span></div>
-        </div>
-        <div class="cc" onclick="selClient(this,'Ana López','AL','#FFFBEB','#D97706','25 años · Tonificación · Semana 3')">
-          <div class="cc-top"><div class="av av-sm" style="background:#FFFBEB;color:#D97706">AL</div><div><div class="cc-nm">Ana López</div><div class="cc-g">Tonificación</div></div></div>
-          <div class="cc-ms"><div class="cm"><div class="cmv" style="color:var(--red)">−1.0</div><div class="cml">kg total</div></div><div class="cm"><div class="cmv">78%</div><div class="cml">adher.</div></div><div class="cm"><div class="cmv">Sem 3</div><div class="cml">semana</div></div></div>
-          <div class="cc-foot"><span class="pill p-a">Revisión</span><span style="font-size:10px;color:var(--muted)">Hace 4 días</span></div>
-        </div>
-        <div class="cc" onclick="selClient(this,'Juan Morales','JM','#FEF2F2','#DC2626','40 años · Rehabilitación · Semana 6')">
-          <div class="cc-top"><div class="av av-sm" style="background:#FEF2F2;color:#DC2626">JM</div><div><div class="cc-nm">Juan Morales</div><div class="cc-g">Rehabilitación</div></div></div>
-          <div class="cc-ms"><div class="cm"><div class="cmv" style="color:var(--muted)">0.0</div><div class="cml">kg total</div></div><div class="cm"><div class="cmv">65%</div><div class="cml">adher.</div></div><div class="cm"><div class="cmv">Sem 6</div><div class="cml">semana</div></div></div>
-          <div class="cc-foot"><span class="pill p-r">Descanso</span><span style="font-size:10px;color:var(--muted)">Hace 1 sem</span></div>
-        </div>
-        <div class="cc" onclick="selClient(this,'Laura Pérez','LP','#ECFDF5','#059669','34 años · Fuerza máxima · Semana 15')">
-          <div class="cc-top"><div class="av av-sm" style="background:#ECFDF5;color:#059669">LP</div><div><div class="cc-nm">Laura Pérez</div><div class="cc-g">Fuerza máxima</div></div></div>
-          <div class="cc-ms"><div class="cm"><div class="cmv" style="color:var(--green)">+1.8</div><div class="cml">kg masa</div></div><div class="cm"><div class="cmv">96%</div><div class="cml">adher.</div></div><div class="cm"><div class="cmv">Sem 15</div><div class="cml">semana</div></div></div>
-          <div class="cc-foot"><span class="pill p-g">Activo</span><span style="font-size:10px;color:var(--muted)">Hoy</span></div>
-        </div>
+      <div class="ccards" id="clients-grid">
         <div class="cc" style="border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;min-height:140px" onclick="openModal('modal-add')">
           <div style="text-align:center;color:var(--muted)"><div style="font-size:24px;margin-bottom:6px">+</div><div style="font-size:12px">Añadir cliente</div></div>
         </div>
       </div>
-      <div class="detail">
+      <div class="detail" id="client-detail" style="display:none">
         <div class="dh">
-          <div class="av av-lg" id="d-av" style="background:#ECFDF5;color:#059669">SR</div>
-          <div><div class="d-name" id="d-name">Sara Ruiz</div><div class="d-meta" id="d-meta">28 años · Pérdida de peso · Semana 8</div></div>
+          <div class="av av-lg" id="d-av" style="background:#ECFDF5;color:#059669">?</div>
+          <div><div class="d-name" id="d-name">Selecciona un cliente</div><div class="d-meta" id="d-meta"></div></div>
           <div class="d-acts">
-            <button class="btns" onclick="openModal('modal-note')">Enviar indicación</button>
-            <button class="btns" onclick="window.open('index.html','_blank')">Ver como cliente</button>
-            <button class="btns btns-a" onclick="openModal('modal-assign')">Asignar rutina</button>
+            <button class="btns" onclick="openMsgModal()">Enviar mensaje</button>
+            <button class="btns btns-a" onclick="openAssignModal()">Asignar rutina</button>
+            <button class="btns btns-a" onclick="openAssignDietModal()">Asignar dieta</button>
           </div>
         </div>
         <div class="tabs">
-          <div class="tab on" onclick="swTab('tc-entreno',this)">Entreno</div>
+          <div class="tab on" onclick="swTab('tc-entreno',this)">Entrenos asignados</div>
           <div class="tab" onclick="swTab('tc-progreso',this)">Progreso</div>
           <div class="tab" onclick="swTab('tc-nutricion',this)">Nutrición</div>
-          <div class="tab" onclick="swTab('tc-fotos',this)">Fotos</div>
-          <div class="tab" onclick="swTab('tc-recuperacion',this)">Recuperación</div>
-          <div class="tab" onclick="swTab('tc-indicaciones',this)">Indicaciones</div>
+          <div class="tab" onclick="swTab('tc-mensajes-c',this)">Mensajes</div>
         </div>
         <div class="tbody">
-          <div class="tc on" id="tc-entreno">
-            <div class="m4s">
-              <div class="m4"><div class="m4v">23</div><div class="m4l">Sesiones</div></div>
-              <div class="m4"><div class="m4v" style="color:var(--green)">94%</div><div class="m4l">Adherencia</div></div>
-              <div class="m4"><div class="m4v">60'</div><div class="m4l">Duración media</div></div>
-              <div class="m4"><div class="m4v" style="color:var(--red)">2</div><div class="m4l">Pendientes hoy</div></div>
-            </div>
-            <div class="exl">
-              <div class="exr"><div class="exnum">1</div><div class="exi"><div class="exnm">Sentadilla goblet</div><div class="exs">4 × 12 reps · 16 kg</div></div><span class="pill p-g">Completado</span></div>
-              <div class="exr"><div class="exnum">2</div><div class="exi"><div class="exnm">Hip thrust</div><div class="exs">4 × 10 reps · 80 kg · 🏆 Récord</div></div><span class="pill p-g">Completado</span></div>
-              <div class="exr"><div class="exnum">3</div><div class="exi"><div class="exnm">Plancha lateral</div><div class="exs">3 × 30 seg</div></div><span class="pill p-a">En progreso</span></div>
-              <div class="exr"><div class="exnum">4</div><div class="exi"><div class="exnm">HIIT en cinta</div><div class="exs">20 min · Nivel 7</div></div><span class="pill p-r">Pendiente</span></div>
-              <div class="exr"><div class="exnum">5</div><div class="exi"><div class="exnm">Remo con mancuerna</div><div class="exs">3 × 12 reps · 12 kg</div></div><span class="pill p-r">Pendiente</span></div>
-            </div>
-          </div>
-          <div class="tc" id="tc-progreso">
-            <div class="m4s">
-              <div class="m4"><div class="m4v">68.2</div><div class="m4l">Peso (kg)</div><div class="m4d">↓ −4.2 kg</div></div>
-              <div class="m4"><div class="m4v">23.1%</div><div class="m4l">% Grasa</div><div class="m4d">↓ −3.2%</div></div>
-              <div class="m4"><div class="m4v">47.2</div><div class="m4l">Masa musc.</div><div class="m4d">↑ +1.1 kg</div></div>
-              <div class="m4"><div class="m4v">80 kg</div><div class="m4l">Récord hip thrust</div><div class="m4d">↑ +24 kg</div></div>
-            </div>
-            <div class="g22">
-              <div>
-                <div style="font-size:12px;font-weight:600;margin-bottom:8px">Evolución de peso</div>
-                <div style="background:var(--light);border-radius:10px;padding:14px;margin-bottom:10px;display:flex;justify-content:space-around;text-align:center">
-                  <div><div style="font-size:10px;color:var(--muted)">Enero</div><div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700">72.4</div></div>
-                  <div style="color:var(--green);font-size:20px;align-self:center">→</div>
-                  <div><div style="font-size:10px;color:var(--muted)">Febrero</div><div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700">70.8</div></div>
-                  <div style="color:var(--green);font-size:20px;align-self:center">→</div>
-                  <div><div style="font-size:10px;color:var(--muted)">Marzo</div><div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--green)">68.2</div></div>
-                </div>
-                <div style="font-size:12px;font-weight:600;margin-bottom:8px">% Grasa corporal</div>
-                <div class="pr"><div class="prh"><span>Enero</span><span>26.3%</span></div><div class="prb"><div class="prf" style="width:88%;background:var(--red)"></div></div></div>
-                <div class="pr"><div class="prh"><span>Febrero</span><span>24.8%</span></div><div class="prb"><div class="prf" style="width:77%;background:var(--amber)"></div></div></div>
-                <div class="pr"><div class="prh"><span>Marzo</span><span style="color:var(--green);font-weight:600">23.1%</span></div><div class="prb"><div class="prf" style="width:65%;background:var(--green)"></div></div></div>
-              </div>
-              <div>
-                <div style="font-size:12px;font-weight:600;margin-bottom:8px">Récords personales</div>
-                <div class="pr"><div class="prh"><span style="font-weight:500">Hip thrust</span><span style="color:var(--green);font-weight:600">80 kg</span></div><div class="prb"><div class="prf" style="width:88%;background:var(--green)"></div></div></div>
-                <div class="pr"><div class="prh"><span style="font-weight:500">Sentadilla goblet</span><span style="color:var(--purple);font-weight:600">20 kg</span></div><div class="prb"><div class="prf" style="width:55%;background:var(--purple)"></div></div></div>
-                <div class="pr"><div class="prh"><span style="font-weight:500">Plancha lateral</span><span style="color:var(--red);font-weight:600">45 seg</span></div><div class="prb"><div class="prf" style="width:70%;background:var(--red)"></div></div></div>
-                <div class="pr"><div class="prh"><span style="font-weight:500">Masa muscular</span><span style="color:var(--purple);font-weight:600">47.2 kg</span></div><div class="prb"><div class="prf" style="width:82%;background:var(--purple)"></div></div></div>
-              </div>
-            </div>
-          </div>
-          <div class="tc" id="tc-nutricion">
-            <div class="m4s">
-              <div class="m4"><div class="m4v">1.780</div><div class="m4l">kcal objetivo</div></div>
-              <div class="m4"><div class="m4v">140g</div><div class="m4l">Proteína</div></div>
-              <div class="m4"><div class="m4v">185g</div><div class="m4l">Hidratos</div></div>
-              <div class="m4"><div class="m4v">55g</div><div class="m4l">Grasas</div></div>
-            </div>
-            <div class="pr"><div class="prh"><span style="font-weight:500">Proteína</span><span>127/140g — 91%</span></div><div class="prb" style="height:7px"><div class="prf" style="width:91%;background:var(--green)"></div></div></div>
-            <div class="pr"><div class="prh"><span style="font-weight:500">Hidratos</span><span>142/185g — 77%</span></div><div class="prb" style="height:7px"><div class="prf" style="width:77%;background:var(--purple)"></div></div></div>
-            <div class="pr"><div class="prh"><span style="font-weight:500">Grasas</span><span>48/55g — 87%</span></div><div class="prb" style="height:7px"><div class="prf" style="width:87%;background:var(--amber)"></div></div></div>
-            <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px">
-              <div class="note note-g"><div class="note-lbl">Indicación · Nutrición</div>Prioriza proteína en el desayuno. Intenta llegar a 40g antes de las 10h.</div>
-              <div class="note note-b"><div class="note-lbl">Indicación · Entreno</div>En días de entreno añade 30g de carbohidratos pre-workout. Arroz o avena.</div>
-            </div>
-          </div>
-          <div class="tc" id="tc-fotos">
-            <div class="photo-grid">
-              <div><div class="photo-slot" style="background:#C0DD97"><div style="font-size:9px;font-weight:700;background:rgba(255,255,255,0.8);color:#3B6D11;padding:2px 8px;border-radius:20px">Ene · 72.4kg</div></div></div>
-              <div><div class="photo-slot" style="background:#97C459"><div style="font-size:9px;font-weight:700;background:rgba(255,255,255,0.8);color:#3B6D11;padding:2px 8px;border-radius:20px">Feb · 70.8kg</div></div></div>
-              <div><div class="photo-slot" style="background:#639922"><div style="font-size:9px;font-weight:700;background:rgba(0,0,0,0.3);color:#fff;padding:2px 8px;border-radius:20px">Mar · 68.2kg</div></div></div>
-            </div>
-            <button class="btns" style="width:100%;padding:10px">+ Solicitar foto de progreso</button>
-          </div>
-          <div class="tc" id="tc-recuperacion">
-            <div class="exl">
-              <div class="exr"><div class="exnum">1</div><div class="exi"><div class="exnm">Foam rolling piernas</div><div class="exs">10 min · Pre y post entreno · Diario</div></div><span class="pill p-g">Activo</span></div>
-              <div class="exr"><div class="exnum">2</div><div class="exi"><div class="exnm">Estiramiento cadena posterior</div><div class="exs">15 min · Post entreno · 3×/semana</div></div><span class="pill p-g">Activo</span></div>
-              <div class="exr"><div class="exnum">3</div><div class="exi"><div class="exnm">Activación glúteo medio</div><div class="exs">3 × 15 reps · Con banda · Días de pierna</div></div><span class="pill p-g">Activo</span></div>
-            </div>
-          </div>
-          <div class="tc" id="tc-indicaciones">
-            <div style="margin-bottom:16px">
-              <div style="font-size:12px;font-weight:500;margin-bottom:8px">Enviar indicación a Sara Ruiz</div>
-              <div style="display:flex;gap:8px;margin-bottom:8px">
-                <select class="fi"><option>Entreno</option><option>Nutrición</option><option>Recuperación</option><option>General</option></select>
-                <select class="fi"><option>Normal</option><option>Urgente</option></select>
-              </div>
-              <textarea class="ta" placeholder="Escribe la indicación..."></textarea>
-              <button class="btns btns-a" style="margin-top:8px;padding:9px 18px">Enviar indicación</button>
-            </div>
-            <div class="note note-g"><div class="note-lbl">Hoy · Nutrición</div>Prioriza proteína en el desayuno. Intenta llegar a 40g antes de las 10h.</div>
-            <div class="note note-b"><div class="note-lbl">Hace 3 días · Entreno</div>Esta semana añadimos una serie extra en hip thrust. Llevas muy buen ritmo.</div>
-          </div>
+          <div class="tc on" id="tc-entreno"><div id="client-workouts"><div class="empty"><div class="empty-icon">🏋️</div><p>Sin rutinas asignadas</p></div></div></div>
+          <div class="tc" id="tc-progreso"><div id="client-progress"><div class="empty"><div class="empty-icon">📊</div><p>Sin datos de progreso</p></div></div><button class="btns btns-a" style="margin-top:12px" onclick="openModal('modal-progress')">+ Registrar progreso</button></div>
+          <div class="tc" id="tc-nutricion"><div id="client-diets"><div class="empty"><div class="empty-icon">🥗</div><p>Sin plan de dieta asignado</p></div></div></div>
+          <div class="tc" id="tc-mensajes-c"><div id="client-messages-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px"></div><div style="display:flex;gap:8px"><textarea class="ta" id="msg-input" placeholder="Escribe un mensaje..." style="flex:1;min-height:50px"></textarea><button class="btns btns-a" onclick="sendMessage()">Enviar</button></div></div>
         </div>
       </div>
     </div>
+
+    <!-- RUTINAS -->
     <div class="pg" id="pg-rutinas">
-      <div class="rut-grid">
-        <div class="rut-card"><div class="rut-tag">Fuerza · Tren superior</div><div class="rut-name">Push Day A</div><div class="rut-meta">6 ejercicios · 60 min · 9 asignaciones</div><button class="btns btns-a" style="width:100%;padding:8px">Asignar a cliente</button></div>
-        <div class="rut-card" style="border-top-color:var(--purple)"><div class="rut-tag">Fuerza · Tren inferior</div><div class="rut-name">Leg Day B</div><div class="rut-meta">7 ejercicios · 75 min · 7 asignaciones</div><button class="btns btns-a" style="width:100%;padding:8px">Asignar a cliente</button></div>
-        <div class="rut-card" style="border-top-color:var(--red)"><div class="rut-tag">Cardio · Alta intensidad</div><div class="rut-name">HIIT Metabólico</div><div class="rut-meta">8 intervalos · 25 min · 6 asignaciones</div><button class="btns btns-a" style="width:100%;padding:8px">Asignar a cliente</button></div>
-        <div class="rut-card" style="border-top-color:var(--amber)"><div class="rut-tag">Rehabilitación</div><div class="rut-name">Movilidad de cadera</div><div class="rut-meta">5 ejercicios · 30 min · 2 asignaciones</div><button class="btns btns-a" style="width:100%;padding:8px">Asignar a cliente</button></div>
-        <div class="rut-card" style="border-top-color:#059669"><div class="rut-tag">Fuerza · Full body</div><div class="rut-name">5/3/1 Wendler</div><div class="rut-meta">4 movimientos · 90 min · 4 asignaciones</div><button class="btns btns-a" style="width:100%;padding:8px">Asignar a cliente</button></div>
-        <div class="rut-card" style="border:1.5px dashed var(--border);border-top:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;min-height:140px"><div style="text-align:center;color:var(--muted)"><div style="font-size:24px">+</div><div style="font-size:12px;margin-top:6px">Nueva rutina</div></div></div>
+      <div style="margin-bottom:14px"><button class="tb-btn" onclick="openModal('modal-workout')">+ Nueva rutina</button></div>
+      <div class="rut-grid" id="workouts-grid">
+        <div class="empty" style="grid-column:1/-1"><div class="empty-icon">🏋️</div><p>Sin rutinas creadas</p></div>
       </div>
     </div>
+
+    <!-- DIETAS -->
     <div class="pg" id="pg-dietas">
-      <div class="rut-grid">
-        <div class="rut-card"><div class="rut-tag">Pérdida de peso · Déficit</div><div class="rut-name">Plan Déficit 500kcal</div><div class="rut-meta">1.600 kcal · P:140g C:150g G:45g</div><button class="btns btns-a" style="width:100%;padding:8px">Asignar a cliente</button></div>
-        <div class="rut-card" style="border-top-color:var(--purple)"><div class="rut-tag">Hipertrofia · Superávit</div><div class="rut-name">Plan Volumen limpio</div><div class="rut-meta">2.800 kcal · P:200g C:340g G:70g</div><button class="btns btns-a" style="width:100%;padding:8px">Asignar a cliente</button></div>
-        <div class="rut-card" style="border-top-color:var(--amber)"><div class="rut-tag">Mantenimiento</div><div class="rut-name">Plan Recomposición</div><div class="rut-meta">2.200 kcal · P:180g C:240g G:60g</div><button class="btns btns-a" style="width:100%;padding:8px">Asignar a cliente</button></div>
+      <div style="margin-bottom:14px"><button class="tb-btn" onclick="openModal('modal-diet')">+ Nueva dieta</button></div>
+      <div class="rut-grid" id="diets-grid">
+        <div class="empty" style="grid-column:1/-1"><div class="empty-icon">🥗</div><p>Sin planes de dieta</p></div>
       </div>
     </div>
-    <div class="pg" id="pg-agenda">
+
+    <!-- MENSAJES -->
+    <div class="pg" id="pg-mensajes">
       <div class="card">
-        <div class="ch"><div class="ct">Citas de hoy — viernes 27 marzo</div><button class="btns btns-a">+ Nueva cita</button></div>
-        <div class="sch"><div class="sch-t">09:00</div><div class="sch-i"><div class="sch-n">Sara Ruiz</div><div class="sch-s">Fuerza + HIIT · 60 min</div></div><span class="pill p-g">Confirmada</span></div>
-        <div class="sch" style="border-left-color:var(--red)"><div class="sch-t">11:30</div><div class="sch-i"><div class="sch-n">Miguel Fernández</div><div class="sch-s">Pecho y tríceps · 75 min</div></div><span class="pill p-g">Confirmada</span></div>
-        <div class="sch" style="border-left-color:var(--amber)"><div class="sch-t">17:00</div><div class="sch-i"><div class="sch-n">Ana López</div><div class="sch-s">Check-in mensual · 30 min</div></div><span class="pill p-a">Pendiente</span></div>
-        <div class="sch"><div class="sch-t">19:30</div><div class="sch-i"><div class="sch-n">Laura Pérez</div><div class="sch-s">Sentadilla 5/3/1 · 90 min</div></div><span class="pill p-g">Confirmada</span></div>
+        <div class="ch"><div class="ct">Mensajes con clientes</div></div>
+        <div id="all-messages"><div class="empty"><div class="empty-icon">💬</div><p>Sin mensajes</p></div></div>
       </div>
     </div>
+
+    <!-- PROGRESO GLOBAL -->
     <div class="pg" id="pg-progreso">
-      <div class="kpis" style="grid-template-columns:repeat(3,minmax(0,1fr))">
-        <div class="kpi"><div class="kpi-l">Pérdida peso media</div><div class="kpi-v">−2.4kg</div><div class="kpi-s" style="color:var(--green)">Últimos 30 días</div></div>
-        <div class="kpi"><div class="kpi-l">Mejora fuerza media</div><div class="kpi-v">+18%</div><div class="kpi-s" style="color:var(--purple)">Kilos levantados</div></div>
-        <div class="kpi"><div class="kpi-l">Récords batidos</div><div class="kpi-v">7</div><div class="kpi-s" style="color:var(--amber)">Este mes</div></div>
-      </div>
       <div class="card">
-        <div 
-  <div class="ch"><div class="ct">Evolución de peso — todos los clientes</div></div>
-        <div class="pr"><div class="prh"><span style="font-weight:500">Sara Ruiz</span><span>72.4 → <strong style="color:var(--green)">68.2 kg</strong></span></div><div class="prb" style="height:7px"><div class="prf" style="width:72%;background:var(--green)"></div></div></div>
-        <div class="pr"><div class="prh"><span style="font-weight:500">Miguel Fernández</span><span>82.0 → <strong style="color:var(--purple)">84.1 kg</strong></span></div><div class="prb" style="height:7px"><div class="prf" style="width:55%;background:var(--purple)"></div></div></div>
-        <div class="pr"><div class="prh"><span style="font-weight:500">Laura Pérez</span><span>63.0 → <strong style="color:var(--amber)">64.8 kg</strong></span></div><div class="prb" style="height:7px"><div class="prf" style="width:40%;background:var(--amber)"></div></div></div>
-        <div class="pr"><div class="prh"><span style="font-weight:500">Ana López</span><span>68.0 → <strong style="color:var(--red)">67.0 kg</strong></span></div><div class="prb" style="height:7px"><div class="prf" style="width:30%;background:var(--red)"></div></div></div>
+        <div class="ch"><div class="ct">Progreso de todos los clientes</div></div>
+        <div id="all-progress"><div class="empty"><div class="empty-icon">📊</div><p>Sin datos de progreso</p></div></div>
       </div>
     </div>
+
   </div>
 </div>
-</div>
-
+  </div>
+  <!-- MODALS -->
 <div class="modal-bg" id="modal-add">
   <div class="modal">
-    <div class="modal-head"><div class="modal-t">Añadir nuevo cliente</div><button class="modal-x" onclick="closeModal('modal-add')">×</button></div>
-    <div class="fg"><label class="fl">Nombre completo</label><input class="finp" type="text" placeholder="Nombre del cliente"></div>
-    <div class="fg"><label class="fl">Email</label><input class="finp" type="email" placeholder="email@ejemplo.com"></div>
-    <div class="fg"><label class="fl">Objetivo</label><select class="fsel"><option>Pérdida de peso</option><option>Hipertrofia</option><option>Tonificación</option><option>Fuerza máxima</option><option>Rehabilitación</option></select></div>
-    <div class="fg"><label class="fl">Peso inicial (kg)</label><input class="finp" type="number" placeholder="70"></div>
-    <button class="modal-btn">Crear cuenta de cliente</button>
+    <div class="modal-head"><div class="modal-t">Añadir cliente</div><button class="modal-x" onclick="closeModal('modal-add')">×</button></div>
+    <div class="fg"><label class="fl">Email del cliente</label><input class="finp" type="email" id="add-email" placeholder="email@cliente.com"></div>
+    <div class="fg"><label class="fl">Nombre</label><input class="finp" type="text" id="add-name" placeholder="Nombre completo"></div>
+    <div class="fg"><label class="fl">Objetivo</label><select class="fsel" id="add-goal"><option>Pérdida de peso</option><option>Hipertrofia</option><option>Tonificación</option><option>Fuerza máxima</option><option>Rehabilitación</option></select></div>
+    <button class="modal-btn" onclick="addClient()">Añadir cliente</button>
   </div>
 </div>
 
-<div class="modal-bg" id="modal-note">
+<div class="modal-bg" id="modal-workout">
   <div class="modal">
-    <div class="modal-head"><div class="modal-t">Enviar indicación</div><button class="modal-x" onclick="closeModal('modal-note')">×</button></div>
-    <div class="fg"><label class="fl">Tipo</label><select class="fsel"><option>Entreno</option><option>Nutrición</option><option>Recuperación</option><option>General</option></select></div>
-    <div class="fg"><label class="fl">Mensaje</label><textarea class="ta" style="background:#fff;border:1.5px solid var(--border)" placeholder="Escribe la indicación..."></textarea></div>
-    <button class="modal-btn">Enviar indicación</button>
+    <div class="modal-head"><div class="modal-t">Crear rutina</div><button class="modal-x" onclick="closeModal('modal-workout')">×</button></div>
+    <div class="fg"><label class="fl">Nombre de la rutina</label><input class="finp" type="text" id="wo-title" placeholder="Ej: Push Day A"></div>
+    <div class="fg"><label class="fl">Tipo</label><select class="fsel" id="wo-type"><option>Fuerza</option><option>Cardio</option><option>HIIT</option><option>Movilidad</option><option>Rehabilitación</option></select></div>
+    <div class="fg"><label class="fl">Ejercicios (uno por línea)</label><textarea class="ta" id="wo-exercises" placeholder="Sentadilla goblet - 4x12&#10;Hip thrust - 4x10&#10;Plancha - 3x30seg" style="background:#fff;border:1.5px solid var(--border)"></textarea></div>
+    <button class="modal-btn" onclick="createWorkout()">Crear rutina</button>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-diet">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-t">Crear plan de dieta</div><button class="modal-x" onclick="closeModal('modal-diet')">×</button></div>
+    <div class="fg"><label class="fl">Nombre del plan</label><input class="finp" type="text" id="diet-title" placeholder="Ej: Plan déficit 500kcal"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+      <div><label class="fl">Calorías</label><input class="finp" type="number" id="diet-cal" placeholder="1800"></div>
+      <div><label class="fl">Proteína (g)</label><input class="finp" type="number" id="diet-prot" placeholder="140"></div>
+      <div><label class="fl">Hidratos (g)</label><input class="finp" type="number" id="diet-carbs" placeholder="180"></div>
+      <div><label class="fl">Grasas (g)</label><input class="finp" type="number" id="diet-fats" placeholder="55"></div>
+    </div>
+    <div class="fg"><label class="fl">Indicaciones</label><textarea class="ta" id="diet-notes" placeholder="Notas e indicaciones nutricionales..." style="background:#fff;border:1.5px solid var(--border)"></textarea></div>
+    <button class="modal-btn" onclick="createDiet()">Crear plan</button>
   </div>
 </div>
 
 <div class="modal-bg" id="modal-assign">
   <div class="modal">
     <div class="modal-head"><div class="modal-t">Asignar rutina</div><button class="modal-x" onclick="closeModal('modal-assign')">×</button></div>
-    <div class="fg"><label class="fl">Rutina</label><select class="fsel"><option>Push Day A</option><option>Leg Day B</option><option>HIIT Metabólico</option><option>Movilidad de cadera</option><option>5/3/1 Wendler</option></select></div>
-    <div class="fg"><label class="fl">Fecha inicio</label><input class="finp" type="date"></div>
-    <button class="modal-btn">Asignar rutina</button>
+    <div class="fg"><label class="fl">Seleccionar rutina</label><select class="fsel" id="assign-workout-sel"></select></div>
+    <div class="fg"><label class="fl">Fecha</label><input class="finp" type="date" id="assign-date"></div>
+    <button class="modal-btn" onclick="assignWorkout()">Asignar rutina</button>
   </div>
 </div>
 
+<div class="modal-bg" id="modal-assign-diet">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-t">Asignar dieta</div><button class="modal-x" onclick="closeModal('modal-assign-diet')">×</button></div>
+    <div class="fg"><label class="fl">Seleccionar plan</label><select class="fsel" id="assign-diet-sel"></select></div>
+    <button class="modal-btn" onclick="assignDiet()">Asignar plan</button>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-msg">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-t">Enviar mensaje</div><button class="modal-x" onclick="closeModal('modal-msg')">×</button></div>
+    <div class="fg"><label class="fl">Mensaje</label><textarea class="ta" id="msg-content" placeholder="Escribe tu mensaje..." style="background:#fff;border:1.5px solid var(--border);min-height:100px"></textarea></div>
+    <button class="modal-btn" onclick="sendMsgModal()">Enviar mensaje</button>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-progress">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-t">Registrar progreso</div><button class="modal-x" onclick="closeModal('modal-progress')">×</button></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+      <div><label class="fl">Peso (kg)</label><input class="finp" type="number" id="prog-weight" placeholder="70.5" step="0.1"></div>
+      <div><label class="fl">% Grasa</label><input class="finp" type="number" id="prog-fat" placeholder="22.5" step="0.1"></div>
+      <div><label class="fl">Masa muscular (kg)</label><input class="finp" type="number" id="prog-muscle" placeholder="45.2" step="0.1"></div>
+    </div>
+    <div class="fg"><label class="fl">Notas</label><textarea class="ta" id="prog-notes" placeholder="Observaciones..." style="background:#fff;border:1.5px solid var(--border)"></textarea></div>
+    <button class="modal-btn" onclick="saveProgress()">Guardar progreso</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-function goPg(id,el,title,btn){
+const SUPABASE_URL = 'https://ltrmffnwcenvudxxfbek.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_OHBuSxNOxbtFSYGHyoUuCw_dqoxooFl';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let currentUser = null;
+let currentTrainerId = null;
+let selectedClientId = null;
+let clients = [];
+let workouts = [];
+let diets = [];
+
+// INIT
+async function init(){
+  const {data:{user}} = await sb.auth.getUser();
+  if(!user){window.location.href='login.html';return;}
+  currentUser = user;
+  currentTrainerId = user.id;
+  const {data:profile} = await sb.from('profiles').select('*').eq('id',user.id).single();
+  if(profile){
+    document.getElementById('t-nm').textContent = profile.name || user.email;
+    document.getElementById('t-av').textContent = (profile.name||user.email).substring(0,2).toUpperCase();
+  }
+  await loadAll();
+}
+
+async function loadAll(){
+  await loadClients();
+  await loadWorkouts();
+  await loadDiets();
+  await loadStats();
+}
+
+async function loadClients(){
+  const {data} = await sb.from('profiles').select('*').eq('trainer_id',currentTrainerId).eq('role','client');
+  clients = data || [];
+  document.getElementById('client-count').textContent = clients.length;
+  document.getElementById('kpi-clients').textContent = clients.length;
+  renderClients();
+}
+
+async function loadWorkouts(){
+  const {data} = await sb.from('workouts').select('*').eq('trainer_id',currentTrainerId).is('client_id',null);
+  workouts = data || [];
+  document.getElementById('kpi-workouts').textContent = workouts.length;
+  renderWorkouts();
+}
+
+async function loadDiets(){
+  const {data} = await sb.from('diet_plans').select('*').eq('trainer_id',currentTrainerId).is('client_id',null);
+  diets = data || [];
+  document.getElementById('kpi-diets').textContent = diets.length;
+  renderDiets();
+}
+
+async function loadStats(){
+  const {data} = await sb.from('messages').select('*').eq('to_id',currentTrainerId).eq('read',false);
+  document.getElementById('kpi-msgs').textContent = (data||[]).length;
+}
+
+function renderClients(){
+  const grid = document.getElementById('clients-grid');
+  const addBtn = '<div class="cc" style="border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;min-height:140px" onclick="openModal(\'modal-add\')"><div style="text-align:center;color:var(--muted)"><div style="font-size:24px;margin-bottom:6px">+</div><div style="font-size:12px">Añadir cliente</div></div></div>';
+  if(!clients.length){grid.innerHTML=addBtn;return;}
+  const colors=[['#ECFDF5','#059669'],['#EFF6FF','#2563EB'],['#F5F3FF','#7C3AED'],['#FFFBEB','#D97706'],['#FEF2F2','#DC2626']];
+  grid.innerHTML = clients.map((c,i)=>{
+    const [bg,col]=colors[i%colors.length];
+    const initials=(c.name||c.email).substring(0,2).toUpperCase();
+    return `<div class="cc ${selectedClientId===c.id?'sel':''}" onclick="selectClient('${c.id}')">
+      <button class="cc-del" onclick="event.stopPropagation();deleteClient('${c.id}')">Eliminar</button>
+      <div class="cc-top">
+        <div class="av av-sm" style="background:${bg};color:${col}">${initials}</div>
+        <div><div class="cc-nm">${c.name||c.email}</div><div class="cc-g">${c.email}</div></div>
+      </div>
+      <div class="cc-foot"><span class="pill p-g">Activo</span><span style="font-size:10px;color:var(--muted)">${new Date(c.created_at||Date.now()).toLocaleDateString('es')}</span></div>
+    </div>`;
+  }).join('')+addBtn;
+}
+
+function renderWorkouts(){
+  const grid = document.getElementById('workouts-grid');
+  if(!workouts.length){grid.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-icon">🏋️</div><p>Sin rutinas creadas</p></div>';return;}
+  grid.innerHTML = workouts.map(w=>`
+    <div class="rut-card">
+      <button style="position:absolute;top:10px;right:10px;background:rgba(242,92,84,0.1);border:none;color:var(--red);border-radius:6px;padding:3px 7px;font-size:10px;cursor:pointer" onclick="deleteWorkout('${w.id}')">Eliminar</button>
+      <div class="rut-tag">${w.status||'Rutina'}</div>
+      <div class="rut-name">${w.title}</div>
+      <div class="rut-meta">${w.exercises?JSON.parse(w.exercises||'[]').length:0} ejercicios</div>
+      <button class="btns btns-a" style="width:100%;padding:8px" onclick="selectedWorkoutId='${w.id}';openModal('modal-assign')">Asignar a cliente</button>
+    </div>
+  `).join('');
+}
+
+function renderDiets(){
+  const grid = document.getElementById('diets-grid');
+  if(!diets.length){grid.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-icon">🥗</div><p>Sin planes de dieta</p></div>';return;}
+  grid.innerHTML = diets.map(d=>`
+    <div class="rut-card" style="border-top-color:var(--purple)">
+      <button style="position:absolute;top:10px;right:10px;background:rgba(242,92,84,0.1);border:none;color:var(--red);border-radius:6px;padding:3px 7px;font-size:10px;cursor:pointer" onclick="deleteDiet('${d.id}')">Eliminar</button>
+      <div class="rut-tag">Plan nutricional</div>
+      <div class="rut-name">${d.title}</div>
+      <div class="rut-meta">${d.calories||0} kcal · P:${d.protein||0}g C:${d.carbs||0}g G:${d.fats||0}g</div>
+      <button class="btns btns-a" style="width:100%;padding:8px;background:var(--purple);border-color:var(--purple)" onclick="selectedDietId='${d.id}';openModal('modal-assign-diet')">Asignar a cliente</button>
+    </div>
+  `).join('');
+}
+
+async function selectClient(id){
+  selectedClientId = id;
+  const c = clients.find(x=>x.id===id);
+  if(!c)return;
+  const colors=[['#ECFDF5','#059669'],['#EFF6FF','#2563EB'],['#F5F3FF','#7C3AED'],['#FFFBEB','#D97706'],['#FEF2F2','#DC2626']];
+  const i=clients.indexOf(c);
+  const [bg,col]=colors[i%colors.length];
+  const initials=(c.name||c.email).substring(0,2).toUpperCase();
+  document.getElementById('d-av').textContent=initials;
+  document.getElementById('d-av').style.background=bg;
+  document.getElementById('d-av').style.color=col;
+  document.getElementById('d-name').textContent=c.name||c.email;
+  document.getElementById('d-meta').textContent=c.email;
+  document.getElementById('client-detail').style.display='block';
+  renderClients();
+  await loadClientWorkouts(id);
+  await loadClientDiets(id);
+  await loadClientProgress(id);
+  await loadClientMessages(id);
+}
+
+async function loadClientWorkouts(id){
+  const {data}=await sb.from('workouts').select('*').eq('client_id',id);
+  const el=document.getElementById('client-workouts');
+  if(!data||!data.length){el.innerHTML='<div class="empty"><div class="empty-icon">🏋️</div><p>Sin rutinas asignadas</p></div>';return;}
+  el.innerHTML=data.map(w=>`
+    <div class="exr" style="margin-bottom:8px">
+      <div class="exi"><div class="exnm">${w.title}</div><div class="exs">${w.date||''} · ${w.status}</div></div>
+      <span class="pill ${w.status==='completed'?'p-g':w.status==='pending'?'p-a':'p-r'}">${w.status==='completed'?'Completado':w.status==='pending'?'Pendiente':'En progreso'}</span>
+    </div>
+  `).join('');
+}
+
+async function loadClientDiets(id){
+  const {data}=await sb.from('diet_plans').select('*').eq('client_id',id);
+  const el=document.getElementById('client-diets');
+  if(!data||!data.length){el.innerHTML='<div class="empty"><div class="empty-icon">🥗</div><p>Sin plan de dieta asignado</p></div>';return;}
+  el.innerHTML=data.map(d=>`
+    <div class="note note-g" style="margin-bottom:8px">
+      <div class="note-lbl">${d.title}</div>
+      ${d.calories} kcal · Proteína: ${d.protein}g · Hidratos: ${d.carbs}g · Grasas: ${d.fats}g
+    </div>
+  `).join('');
+}
+
+async function loadClientProgress(id){
+  const {data}=await sb.from('progress').select('*').eq('client_id',id).order('date',{ascending:false});
+  const el=document.getElementById('client-progress');
+  if(!data||!data.length){el.innerHTML='<div class="empty"><div class="empty-icon">📊</div><p>Sin datos de progreso</p></div>';return;}
+  el.innerHTML=`<div class="m4s">${data.slice(0,1).map(p=>`
+    <div class="m4"><div class="m4v">${p.weight||'-'}</div><div class="m4l">Peso (kg)</div></div>
+    <div class="m4"><div class="m4v">${p.body_fat||'-'}%</div><div class="m4l">% Grasa</div></div>
+    <div class="m4"><div class="m4v">${p.muscle_mass||'-'}</div><div class="m4l">Masa musc.</div></div>
+  `).join('')}</div>`+data.map(p=>`
+    <div class="note note-b" style="margin-bottom:6px">
+      <div class="note-lbl">${new Date(p.date).toLocaleDateString('es')}</div>
+      Peso: ${p.weight}kg · Grasa: ${p.body_fat}% · Músculo: ${p.muscle_mass}kg${p.notes?'<br>'+p.notes:''}
+    </div>
+  `).join('');
+}
+
+async function loadClientMessages(id){
+  const {data}=await sb.from('messages').select('*').or(`from_id.eq.${currentTrainerId},to_id.eq.${currentTrainerId}`).or(`from_id.eq.${id},to_id.eq.${id}`).order('created_at',{ascending:true});
+  const el=document.getElementById('client-messages-list');
+  if(!data||!data.length){el.innerHTML='<div class="empty"><div class="empty-icon">💬</div><p>Sin mensajes</p></div>';return;}
+  el.innerHTML=data.map(m=>`
+    <div style="padding:10px 13px;border-radius:9px;${m.from_id===currentTrainerId?'background:#ECFDF5;border-left:3px solid #059669':'background:#EFF6FF;border-left:3px solid #3B82F6'}">
+      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;color:${m.from_id===currentTrainerId?'#059669':'#2563EB'}">${m.from_id===currentTrainerId?'Tú':'Cliente'} · ${new Date(m.created_at).toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'})}</div>
+      ${m.content}
+    </div>
+  `).join('');
+}
+
+// ACTIONS
+async function addClient(){
+  const email=document.getElementById('add-email').value.trim();
+  const name=document.getElementById('add-name').value.trim();
+  const goal=document.getElementById('add-goal').value;
+  if(!email){showToast('Introduce el email del cliente');return;}
+  const {data,error}=await sb.from('profiles').insert({id:crypto.randomUUID(),role:'client',name,email,trainer_id:currentTrainerId}).select().single();
+  if(error){showToast('Error: '+error.message);return;}
+  closeModal('modal-add');
+  document.getElementById('add-email').value='';
+  document.getElementById('add-name').value='';
+  showToast('Cliente añadido correctamente');
+  await loadClients();
+}
+
+async function deleteClient(id){
+  if(!confirm('¿Eliminar este cliente?'))return;
+  await sb.from('profiles').delete().eq('id',id);
+  if(selectedClientId===id){selectedClientId=null;document.getElementById('client-detail').style.display='none';}
+  showToast('Cliente eliminado');
+  await loadClients();
+}
+
+async function createWorkout(){
+  const title=document.getElementById('wo-title').value.trim();
+  const type=document.getElementById('wo-type').value;
+  const exText=document.getElementById('wo-exercises').value.trim();
+  if(!title){showToast('Introduce el nombre de la rutina');return;}
+  const exercises=exText.split('\n').filter(e=>e.trim()).map(e=>({name:e.trim()}));
+  await sb.from('workouts').insert({trainer_id:currentTrainerId,title,status:type,exercises:JSON.stringify(exercises)});
+  closeModal('modal-workout');
+  document.getElementById('wo-title').value='';
+  document.getElementById('wo-exercises').value='';
+  showToast('Rutina creada');
+  await loadWorkouts();
+}
+
+async function deleteWorkout(id){
+  if(!confirm('¿Eliminar esta rutina?'))return;
+  await sb.from('workouts').delete().eq('id',id);
+  showToast('Rutina eliminada');
+  await loadWorkouts();
+}
+
+async function createDiet(){
+  const title=document.getElementById('diet-title').value.trim();
+  if(!title){showToast('Introduce el nombre del plan');return;}
+  await sb.from('diet_plans').insert({
+    trainer_id:currentTrainerId,title,
+    calories:parseInt(document.getElementById('diet-cal').value)||0,
+    protein:parseInt(document.getElementById('diet-prot').value)||0,
+    carbs:parseInt(document.getElementById('diet-carbs').value)||0,
+    fats:parseInt(document.getElementById('diet-fats').value)||0,
+    meals:JSON.stringify([document.getElementById('diet-notes').value])
+  });
+  closeModal('modal-diet');
+  document.getElementById('diet-title').value='';
+  showToast('Plan de dieta creado');
+  await loadDiets();
+}
+
+async function deleteDiet(id){
+  if(!confirm('¿Eliminar este plan?'))return;
+  await sb.from('diet_plans').delete().eq('id',id);
+  showToast('Plan eliminado');
+  await loadDiets();
+}
+
+let selectedWorkoutId=null;
+let selectedDietId=null;
+
+function openAssignModal(){
+  if(!selectedClientId){showToast('Selecciona un cliente primero');return;}
+  const sel=document.getElementById('assign-workout-sel');
+  sel.innerHTML=workouts.map(w=>`<option value="${w.id}">${w.title}</option>`).join('');
+  document.getElementById('assign-date').value=new Date().toISOString().split('T')[0];
+  openModal('modal-assign');
+}
+
+function openAssignDietModal(){
+  if(!selectedClientId){showToast('Selecciona un cliente primero');return;}
+  const sel=document.getElementById('assign-diet-sel');
+  sel.innerHTML=diets.map(d=>`<option value="${d.id}">${d.title}</option>`).join('');
+  openModal('modal-assign-diet');
+}
+
+async function assignWorkout(){
+  const woId=document.getElementById('assign-workout-sel').value;
+  const date=document.getElementById('assign-date').value;
+  const wo=workouts.find(w=>w.id===woId);
+  if(!wo||!selectedClientId)return;
+  await sb.from('workouts').insert({trainer_id:currentTrainerId,client_id:selectedClientId,title:wo.title,exercises:wo.exercises,date,status:'pending'});
+  closeModal('modal-assign');
+  showToast('Rutina asignada al cliente');
+  await loadClientWorkouts(selectedClientId);
+}
+
+async function assignDiet(){
+  const dietId=document.getElementById('assign-diet-sel').value;
+  const diet=diets.find(d=>d.id===dietId);
+  if(!diet||!selectedClientId)return;
+  await sb.from('diet_plans').insert({trainer_id:currentTrainerId,client_id:selectedClientId,title:diet.title,calories:diet.calories,protein:diet.protein,carbs:diet.carbs,fats:diet.fats,meals:diet.meals});
+  closeModal('modal-assign-diet');
+  showToast('Dieta asignada al cliente');
+  await loadClientDiets(selectedClientId);
+}
+
+async function sendMessage(){
+  const content=document.getElementById('msg-input').value.trim();
+  if(!content||!selectedClientId)return;
+  await sb.from('messages').insert({from_id:currentTrainerId,to_id:selectedClientId,content});
+  document.getElementById('msg-input').value='';
+  await loadClientMessages(selectedClientId);
+}
+
+function openMsgModal(){
+  if(!selectedClientId){showToast('Selecciona un cliente primero');return;}
+  openModal('modal-msg');
+}
+
+async function sendMsgModal(){
+  const content=document.getElementById('msg-content').value.trim();
+  if(!content||!selectedClientId)return;
+  await sb.from('messages').insert({from_id:currentTrainerId,to_id:selectedClientId,content});
+  closeModal('modal-msg');
+  document.getElementById('msg-content').value='';
+  showToast('Mensaje enviado');
+  await loadClientMessages(selectedClientId);
+}
+
+async function saveProgress(){
+  if(!selectedClientId)return;
+  await sb.from('progress').insert({
+    client_id:selectedClientId,
+    weight:parseFloat(document.getElementById('prog-weight').value)||null,
+    body_fat:parseFloat(document.getElementById('prog-fat').value)||null,
+    muscle_mass:parseFloat(document.getElementById('prog-muscle').value)||null,
+    notes:document.getElementById('prog-notes').value
+  });
+  closeModal('modal-progress');
+  showToast('Progreso guardado');
+  await loadClientProgress(selectedClientId);
+}
+
+async function doLogout(){
+  await sb.auth.signOut();
+  window.location.href='login.html';
+}
+
+function goPg(id,el,title){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.sb-it').forEach(n=>n.classList.remove('on'));
   document.getElementById('pg-'+id).classList.add('on');
   document.getElementById('pg-title').textContent=title;
-  document.getElementById('top-btn').textContent=btn;
   if(el)el.classList.add('on');
 }
-function selClient(el,name,initials,bg,color,meta){
-  document.querySelectorAll('.cc').forEach(c=>c.classList.remove('sel'));
-  el.classList.add('sel');
-  document.getElementById('d-av').textContent=initials;
-  document.getElementById('d-av').style.background=bg;
-  document.getElementById('d-av').style.color=color;
-  document.getElementById('d-name').textContent=name;
-  document.getElementById('d-meta').textContent=meta;
-}
+
 function swTab(id,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   document.querySelectorAll('.tc').forEach(t=>t.classList.remove('on'));
   el.classList.add('on');
   document.getElementById(id).classList.add('on');
 }
+
 function openModal(id){document.getElementById(id).classList.add('open')}
 function closeModal(id){document.getElementById(id).classList.remove('open')}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.style.display='block';
+  setTimeout(()=>t.style.display='none',3000);
+}
+
+init();
 </script>
 </body>
 </html>
